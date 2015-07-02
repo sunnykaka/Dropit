@@ -10,12 +10,20 @@ import UIKit
 
 class DropitView: UIView {
 
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
+    private var pathDict = [String:UIBezierPath]()
+    
+    func setPath(name: String, path: UIBezierPath) {
+        pathDict[name] = path
+        setNeedsDisplay()
     }
-    */
+
+    override func drawRect(rect: CGRect) {
+        for (_, path) in pathDict {
+            path.stroke()
+        }
+    }
+
+    
+    
 
 }

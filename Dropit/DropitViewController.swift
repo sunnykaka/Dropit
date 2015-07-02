@@ -47,6 +47,18 @@ class DropitViewController: UIViewController, UIDynamicAnimatorDelegate {
         dynamicAnimator.addBehavior(dropitBehavior)
     }
     
+    struct PathName {
+        static let BarrierPathName = "CenterBarrier"
+    }
+    
+    override func viewDidLayoutSubviews() {
+        let barrierSize = dropSize
+        let barrierOrigin = CGPoint(x: gameView.bounds.midX - dropSize.width/2, y: gameView.bounds.midY - dropSize.height/2)
+        let path = UIBezierPath(ovalInRect: CGRect(origin: barrierOrigin, size: barrierSize))
+        dropitBehavior.addBarrier(PathName.BarrierPathName, path: path)
+        gameView.setPath(PathName.BarrierPathName, path: path)
+    }
+    
     func removeCompeleteRow() {
         var needRemoveViews = [UIView]()
         var needRemove = true
